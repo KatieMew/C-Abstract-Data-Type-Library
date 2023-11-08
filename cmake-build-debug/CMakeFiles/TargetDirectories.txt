@@ -1,0 +1,3 @@
+C:/Users/benja/CLionProjects/usage_lib/cmake-build-debug/CMakeFiles/usage_lib.dir
+C:/Users/benja/CLionProjects/usage_lib/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/benja/CLionProjects/usage_lib/cmake-build-debug/CMakeFiles/rebuild_cache.dir
