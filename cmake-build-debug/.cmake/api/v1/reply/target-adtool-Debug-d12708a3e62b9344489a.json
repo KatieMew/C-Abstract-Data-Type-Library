@@ -3,7 +3,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "libusage_lib.a"
+			"path" : "libadtool.a"
 		}
 	],
 	"backtrace" : 1,
@@ -54,9 +54,9 @@
 			]
 		}
 	],
-	"id" : "usage_lib::@6890427a1f51a3e7e1df",
-	"name" : "usage_lib",
-	"nameOnDisk" : "libusage_lib.a",
+	"id" : "adtool::@6890427a1f51a3e7e1df",
+	"name" : "adtool",
+	"nameOnDisk" : "libadtool.a",
 	"paths" : 
 	{
 		"build" : ".",

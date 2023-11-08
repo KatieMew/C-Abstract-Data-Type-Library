@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "usage_lib",
+					"name" : "adtool",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "usage_lib::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-usage_lib-Debug-96131e38806ccb711b8c.json",
-					"name" : "usage_lib",
+					"id" : "adtool::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-adtool-Debug-d12708a3e62b9344489a.json",
+					"name" : "adtool",
 					"projectIndex" : 0
 				}
 			]

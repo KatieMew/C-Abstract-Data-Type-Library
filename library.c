@@ -323,3 +323,74 @@ void **ht_values(const HashADT t) {
     }
     return values;
 }
+
+// ||---------------||
+// ||  Linked List  ||
+// ||---------------||
+void initLinkedList(LinkedList *list) {
+    list->head = NULL;
+    list->size = 0;
+}
+void insert(LinkedList *list, void *data) {
+    Node *new = (Node *)malloc(sizeof(Node));
+    if (new == NULL) {
+        fprintf(stderr, "Memory allocation failed creating new linked list node.\n");
+        exit(EXIT_FAILURE);
+    }
+    new->data = data;
+    new->next = list->head;
+    list->head = new;
+    list->size++;
+}
+bool isLinkedListEmpty(LinkedList *list) {
+    return (list->size == 0);
+}
+
+void removeFirstLinkedNode(LinkedList *list) {
+    if (isLinkedListEmpty(list)) {
+        fprintf(stderr, "List is empty. Cannot remove first node.\n");
+        return;
+    }
+    Node *node = list->head;
+    list->head = node->next;
+    free(node);
+    list->size--;
+}
+
+void removeLinkedListNode(LinkedList *list, void *data) {
+    if (isLinkedListEmpty(list)) {
+        fprintf(stderr, "List is empty. Cannot remove specified node.\n");
+        return;
+    }
+    Node *curr = list->head;
+    Node *prev = NULL;
+    while (curr != NULL) {
+        if (curr->data == data) {
+                if (prev == NULL) {
+                    list->head = curr->next;
+                } else {
+                    prev->next = curr->next;
+                }
+                free(curr);
+                list->size--;
+                return;
+        }
+        prev = curr;
+        curr = curr->next;
+    }
+    // no data found
+    fprintf(stderr, "Data does not exist in linked list.\n");
+}
+size_t getLinkedListSize(LinkedList *list) {
+    return list->size;
+}
+void freeLinkedList(LinkedList *list) {
+    while (!isLinkedListEmpty(list)) {
+        // remove first node till end, already frees the nodes!!!
+        removeFirstLinkedNode(list);
+    }
+}
+
+// ||---------------||
+// ||     QUEUE     ||
+// ||---------------||

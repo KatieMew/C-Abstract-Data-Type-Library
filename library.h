@@ -58,6 +58,28 @@ void **ht_values( const HashADT t );
 static double loadFactor(HashADT t);
 
 // ||---------------||
+// ||  Linked List  ||
+// ||---------------||
+typedef struct Node {
+    void *data;
+    struct Node *next;
+} Node;
+
+typedef struct {
+    Node *head;
+    size_t size;
+} LinkedList;
+
+void initLinkedList(LinkedList *list);
+void insert(LinkedList *list, void *data);
+bool isLinkedListEmpty(LinkedList *list);
+void removeLinkedListNode(LinkedList *list, void *data);
+void removeFirstLinkedNode(LinkedList *list);
+size_t getLinkedListSize(LinkedList *list);
+void freeLinkedList(LinkedList *list);
+
+
+// ||---------------||
 // ||     QUEUE     ||
 // ||---------------||
 

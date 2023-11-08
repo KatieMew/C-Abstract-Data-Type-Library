@@ -731,7 +731,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "usage_lib"
+			"value" : "adtool"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1120,6 +1120,42 @@
 			],
 			"type" : "INTERNAL",
 			"value" : "TRUE"
+		},
+		{
+			"name" : "adtool_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "C:/Users/benja/CLionProjects/usage_lib/cmake-build-debug"
+		},
+		{
+			"name" : "adtool_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "adtool_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "C:/Users/benja/CLionProjects/usage_lib"
 		},
 		{
 			"name" : "usage_lib_BINARY_DIR",
