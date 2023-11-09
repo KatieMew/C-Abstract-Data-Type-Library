@@ -3,6 +3,19 @@
 #include <stdio.h>
 
 // ||---------------||
+// ||    Helpers    ||
+// ||---------------||
+
+/*
+ * Creates a new node with provided data
+ */
+Node *newNode(void *data) {
+    Node *new = (Node *)malloc(sizeof(Node));
+    new->data = data;
+    new->next = NULL;
+}
+
+// ||---------------||
 // || DYNAMIC ARRAY ||
 // ||---------------||
 
@@ -327,10 +340,18 @@ void **ht_values(const HashADT t) {
 // ||---------------||
 // ||  Linked List  ||
 // ||---------------||
+
+/*
+ * Initializes linked list
+ */
 void initLinkedList(LinkedList *list) {
     list->head = NULL;
     list->size = 0;
 }
+
+/*
+ * Inserts a node in the linked list
+ */
 void insert(LinkedList *list, void *data) {
     Node *new = (Node *)malloc(sizeof(Node));
     if (new == NULL) {
@@ -342,10 +363,17 @@ void insert(LinkedList *list, void *data) {
     list->head = new;
     list->size++;
 }
+
+/*
+ * Checks if the list is empty
+ */
 bool isLinkedListEmpty(LinkedList *list) {
     return (list->size == 0);
 }
 
+/*
+ * Removes the first node in the list
+ */
 void removeFirstLinkedNode(LinkedList *list) {
     if (isLinkedListEmpty(list)) {
         fprintf(stderr, "List is empty. Cannot remove first node.\n");
@@ -357,6 +385,9 @@ void removeFirstLinkedNode(LinkedList *list) {
     list->size--;
 }
 
+/*
+ * Removes a specific node in the linked list
+ */
 void removeLinkedListNode(LinkedList *list, void *data) {
     if (isLinkedListEmpty(list)) {
         fprintf(stderr, "List is empty. Cannot remove specified node.\n");
@@ -364,6 +395,7 @@ void removeLinkedListNode(LinkedList *list, void *data) {
     }
     Node *curr = list->head;
     Node *prev = NULL;
+    // loops until data is found or end of linked list reached
     while (curr != NULL) {
         if (curr->data == data) {
                 if (prev == NULL) {
@@ -381,9 +413,17 @@ void removeLinkedListNode(LinkedList *list, void *data) {
     // no data found
     fprintf(stderr, "Data does not exist in linked list.\n");
 }
+
+/*
+ * Gets the size of the linked list
+ */
 size_t getLinkedListSize(LinkedList *list) {
     return list->size;
 }
+
+/*
+ * Frees the dynamically allocated data.
+ */
 void freeLinkedList(LinkedList *list) {
     while (!isLinkedListEmpty(list)) {
         // remove first node till end, already frees the nodes!!!
@@ -394,3 +434,85 @@ void freeLinkedList(LinkedList *list) {
 // ||---------------||
 // ||     QUEUE     ||
 // ||---------------||
+
+/*
+ * Initializes queue.
+ */
+void initQueue(Queue *queue, size_t capacity) {
+    queue = (Queue *)malloc(sizeof(Queue));
+    if (queue == NULL) {
+        fprintf(stderr, "Memory allocation failed creating queue.\n");
+        exit(EXIT_FAILURE);
+    }
+    queue->capacity = capacity;
+    queue->head = queue->tail = NULL;
+}
+
+/*
+ * Checks if queue is empty (no size)
+ */
+bool isQueueEmpty(Queue *queue) {
+    return (queue->size == 0);
+}
+
+/*
+ * Checks if queue size is more than specified capacity
+ */
+bool isQueueFull(Queue *queue) {
+    return (queue->size > queue->capacity);
+}
+
+/*
+ * removes first Node in queue and returns it's data.
+ */
+void *dequeue(Queue *queue) {
+    // queue is empty and cannot dequeue
+    if (queue->head == NULL) {
+        fprintf(stderr, "Cannot dequeue as there are no nodes to dequeue!\n");
+    }
+    // set head to the next one
+    Node *dequeued = queue->head;
+    queue->head = queue->head->next;
+
+    // if the next was NULL, the tail must be NULL i.e. there was only one Node in queue
+    if (queue->head == NULL) {
+        queue->tail = NULL;
+    }
+    queue->size--;
+
+    void *data = dequeued->data; // data to return from dequeued node
+    free(dequeued); // free up dequeued Node's memory
+    return data;
+}
+
+void enqueue(Queue *queue, void *data) {
+    // check if enqueuing makes the size larger than capacity
+    if (queue->size >= queue->capacity) {
+        fprintf(stderr, "Queue exceeds capacity. Cannot enqueue.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    Node *new = newNode(data);
+    // no nodes in queue
+    if (queue->tail == NULL) {
+        queue->head = queue->tail = new;
+    } else {
+        queue->tail->next = new;
+        queue->tail = new;
+    }
+    queue->size++;
+}
+
+size_t getQueueSize(Queue *queue) {
+    return queue->size;
+}
+
+void freeQueue(Queue *queue) {
+    while (!isQueueEmpty(queue)) {
+        Node *dequeued = queue->head;
+        queue->head = dequeued->next;
+        free(dequeued->data);
+        free(dequeued);
+    }
+    free(queue);
+}

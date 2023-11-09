@@ -1,9 +1,20 @@
-#ifndef USAGE_LIB_LIBRARY_H
-#define USAGE_LIB_LIBRARY_H
+#ifndef ADTOOL_LIBRARY_H
+#define ADTOOL_LIBRARY_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+
+
+// ||---------------||
+// ||    Helpers    ||
+// ||---------------||
+typedef struct Node {
+    void *data;
+    struct Node *next;
+} Node;
+// helper to create new nodes (used for more than linked list)
+Node *newNode(void *data);
 
 // ||---------------||
 // || DYNAMIC ARRAY ||
@@ -60,11 +71,6 @@ static double loadFactor(HashADT t);
 // ||---------------||
 // ||  Linked List  ||
 // ||---------------||
-typedef struct Node {
-    void *data;
-    struct Node *next;
-} Node;
-
 typedef struct {
     Node *head;
     size_t size;
@@ -83,10 +89,25 @@ void freeLinkedList(LinkedList *list);
 // ||     QUEUE     ||
 // ||---------------||
 
+// uses the Node struct made
+typedef struct {
+    struct Node *head;
+    struct Node *tail;
+    size_t size;
+    size_t capacity;
+} Queue;
+
+void initQueue(Queue *queue, size_t capacity);
+bool isQueueEmpty(Queue *queue);
+bool isQueueFull(Queue *queue);
+void *dequeue(Queue *queue);
+void enqueue(Queue *queue, void *data);
+size_t getQueueSize(Queue *queue);
+void freeQueue(Queue *queue);
 
 // ||---------------||
 // ||     STACK     ||
 // ||---------------||
 
 
-#endif //USAGE_LIB_LIBRARY_H
+#endif //ADTOOL_LIBRARY_H
